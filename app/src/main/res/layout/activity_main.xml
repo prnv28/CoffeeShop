@@ -33,7 +33,7 @@
         android:checked="false"
         android:padding="16dp"
         android:text="Wipped Cream"
-        android:onClick="iswippedcream"
+        android:onClick="checkwippedcream"
         android:textSize="16sp" />
 
     <CheckBox
@@ -43,7 +43,7 @@
         android:layout_marginLeft="16dp"
         android:textSize="16sp"
         android:text="Chocolate"
-        android:onClick="ischocolate"
+        android:onClick="checkchocolate"
         android:padding="16dp"/>
     <TextView
         android:layout_width="wrap_content"

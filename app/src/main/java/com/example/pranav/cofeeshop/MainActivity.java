@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,12 +19,23 @@ public class MainActivity extends AppCompatActivity {
     boolean iswippedcream =false;
     boolean ischocolate = false;
 
+    CheckBox hasWipped;
+    CheckBox hasChocolate;
+    String name;
+    EditText getstring;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        hasWipped = (CheckBox) findViewById(R.id.check);
+        hasChocolate = (CheckBox) findViewById(R.id.check1);
+        getstring =(EditText) findViewById(R.id.edit1);
+
     }
+
 
     public void increment(View view) {
         quantity+=1;
@@ -52,11 +64,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void setorder(View view) {
         display(quantity);
-        EditText getstring =(EditText) findViewById(R.id.edit1);
-        String name = getstring.getText().toString();
+        name = getstring.getText().toString();
         String pricemessage = "Name : "+ name ;
-        pricemessage+="\n Wipped cream ? " + iswippedcream;
-        pricemessage+="\n chocolate ? " + ischocolate;
+        pricemessage+="\n Wipped cream ? " + hasWipped.isChecked();
+        pricemessage+="\n chocolate ? " + hasChocolate.isChecked();
         pricemessage+="\n price : " + calculateprice();
         pricemessage+="\n Thankyou!!!";
         String subject = "ORDER SUMMARY";
@@ -72,10 +83,10 @@ public class MainActivity extends AppCompatActivity {
 
     private int calculateprice() {
         int pricepercup = 5;
-        if(iswippedcream){
+        if(hasWipped.isChecked()){
             pricepercup+=1;
         }
-        if(ischocolate){
+        if(hasChocolate.isChecked()){
             pricepercup+=2;
         }
         return (quantity*pricepercup);
@@ -93,14 +104,41 @@ public class MainActivity extends AppCompatActivity {
 
     public void reset(View view) {
         quantity=0;
+        if (hasWipped.isChecked()){
+            hasWipped.setChecked(false);
+           hasWipped.setSelected(false);
+        }
+        if (hasChocolate.isChecked()){
+            hasChocolate.setChecked(false);
+           hasChocolate.setSelected(false);
+        }
+        getstring.setText("");
         display(quantity);
     }
 
-    public void iswippedcream(View view) {
-        iswippedcream=true;
+
+    public void checkwippedcream(View view) {
+        if(!hasWipped.isChecked())
+        {
+            hasWipped.setChecked(false);
+            hasWipped.setSelected(false);
+        }
+        else {
+            hasWipped.setChecked(true);
+            hasWipped.setSelected(true);
+        }
     }
 
-    public void ischocolate(View view) {
-        ischocolate=true;
+    public void checkchocolate(View view) {
+        if(!hasChocolate.isChecked())
+        {
+            hasChocolate.setChecked(false);
+            hasChocolate.setSelected(false);
+        }
+        else {
+            hasChocolate.setChecked(true);
+            hasChocolate.setSelected(true);
+        }
     }
+
 }
